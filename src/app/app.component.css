@@ -1,0 +1,24 @@
+body{
+  background: #000000;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white;
+}
+div{
+  font-family: Baskerville, "Baskerville Old Face", "Goudy Old Style", Garamond, "Times New Roman", serif;
+  font-size: 24px;
+}
+table{
+  font-family: Baskerville, "Baskerville Old Face", "Goudy Old Style", Garamond, "Times New Roman", serif;
+}
+td,tr,th {
+  background: #333333!important;
+  color: white!important;
+}
+.ui-paginator-bottom {
+  background: #333333!important;
+  color: white!important;
+}
+.world  h2,.world h3{
+  display: inline;
+}
