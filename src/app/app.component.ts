@@ -14,15 +14,15 @@ import {timer} from 'rxjs';
 export class AppComponent implements OnInit {
 
   title = 'Covid';
-  private cols: any[];
-  private results: Result[];
-  private global: World;
-  private todayDeaths: Result[];
-  private todayCases: Result[];
-  private data: ChartData;
-  private top10: Result[];
-  private repeateRate=20;
-  private options:any;
+  public cols: any[];
+  public results: Result[];
+  public global: World;
+  public todayDeaths: Result[];
+  public todayCases: Result[];
+  public data: ChartData;
+  public top10: Result[];
+  public repeateRate=20;
+  public options:any;
 
   constructor(private covidService: CovidService) {
   }
