@@ -1,7 +1,5 @@
-body{
-  background: #000000;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+*{
+  background: black;
   color: white;
 }
 div{
@@ -10,10 +8,15 @@ div{
 }
 table{
   font-family: Baskerville, "Baskerville Old Face", "Goudy Old Style", Garamond, "Times New Roman", serif;
+  width: 100vw;
+}
+input{
+  font-size: 18px;
 }
 td,tr,th {
   background: #333333!important;
   color: white!important;
+  font-size: 20px;
 }
 .ui-paginator-bottom {
   background: #333333!important;
@@ -21,4 +24,15 @@ td,tr,th {
 }
 .world  h2,.world h3{
   display: inline;
+}
+.canvasjs-chart-credit{
+  display: none!important;
+}
+span[value='Trial Version']{
+display: none!important;
+}
+#chartContainer {
+  background: #000000!important;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #434343, #000000)!important;  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #434343, #000000)!important;
 }
