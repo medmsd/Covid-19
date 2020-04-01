@@ -6,7 +6,7 @@
     "Covid": {
       "projectType": "application",
       "schematics": {},
-      "root": "./src",
+      "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
@@ -21,7 +21,12 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
+              }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
