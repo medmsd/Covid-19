@@ -2,12 +2,12 @@
 <div class="text-center" [style]="{'display' : loaded ? 'block': 'none'}" style="margin: 0 auto;left: 50%;right:50%"
      id="chartContainer" name="chartContainer" style="height: 370px; width: 100%;"></div>
 <div>
-  <br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   <div class="text-center world">
     <h1>Global World</h1> <br>
     <div>
       <h2>Cases : </h2>
-      <h3>{{global.cases}}</h3>
+      <h3>{{global.cases }}</h3>
     </div>
     <h2> Deaths : </h2>
     <h3 style="color:red">{{global.deaths}} </h3>
@@ -81,7 +81,7 @@
   </mat-form-field>
 
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="dataSource" matSort matSortStart="desc" >
 
       <ng-container matColumnDef="country">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Country</th>

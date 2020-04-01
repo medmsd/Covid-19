@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
     this.covidService.getWorldData().pipe(
       expand(_ => timer(this.repeateRate * 1000).pipe(concatMap(_ => this.covidService.getWorldData())))).subscribe((global) => {
       this.global = global;
+      console.log(global);
     });
     this.covidService.getAllDataByTodayDeaths().pipe(
       expand(_ => timer(this.repeateRate * 1000).pipe(concatMap(_ => this.covidService.getAllDataByTodayDeaths())))).subscribe((data) => {
