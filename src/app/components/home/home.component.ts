@@ -23,22 +23,22 @@ export class HomeComponent implements OnInit {
   public global: Observable<World>;
   public todayDeaths: Observable<Result[]>;
   public todayCases: Observable<Result[]>;
-  public dataPoints: DataPoint[]=[];
+  public dataPoints: DataPoint[] = [];
   public topNumber = 10;
   public options: any;
   public dataSource = new MatTableDataSource<Result>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private covidService: CovidService,private router:Router) {
+  constructor(private covidService: CovidService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.results = this.covidService.getAllData();
-    this.cols = ['country', 'cases', 'deaths', 'recovered', 'todayDeaths','todayCases',];
+    this.cols = ['country', 'cases', 'deaths', 'recovered', 'todayDeaths', 'todayCases',];
     this.options = {
-      title:{
-        text:'Top 10 Countries',
+      title: {
+        text: 'Top 10 Countries',
         x: 'center'
       },
       tooltip: {
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
       legend: {
         x: 'center',
         y: 'bottom',
-        data: this.dataPoints.map((dataPoint)=>dataPoint.value)
+        data: this.dataPoints.map((dataPoint) => dataPoint.value)
       },
       series: [
         {
@@ -58,11 +58,12 @@ export class HomeComponent implements OnInit {
         }
       ]
     };
-    merge(this.sort.sortChange, this.paginator.page)
+
+    merge()
       .pipe(
         startWith({}),
         switchMap(() => {
-          return this.covidService!.getAllData()
+          return this.covidService!.getAllData();
         }),
         map(data => {
           return data;
@@ -71,43 +72,47 @@ export class HomeComponent implements OnInit {
           return of<Result[]>([]);
         })
       ).subscribe(data => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       this.filteredCountries = this.search.valueChanges
         .pipe(
           startWith(''),
           map(country => country ? this._filteredCountries(country) : this.countries.slice())
         );
-      data.slice(0,this.topNumber).forEach((result)=>{
-        this.dataPoints.push(new DataPoint(result.cases,result.country));
-      })
+      data.slice(0, this.topNumber).forEach((result) => {
+        this.dataPoints.push(new DataPoint(result.cases, result.country));
+      });
       this.updateOptions = {
         series: [{
           data: this.dataPoints
         }]
       };
-      this.dataSource.data = data;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+
       this.countries = data.sort(this.compareName).map((result) => new CountryFlag(result.country, result.countryInfo.flag));
     });
     this.global = this.covidService.getWorldData();
     this.todayDeaths = this.covidService.getAllDataByTodayDeaths();
     this.todayCases = this.covidService.getAllDataByTodayCases();
   }
+
   private _filteredCountries(value: string): CountryFlag[] {
     const filterValue = value.toLowerCase();
     return this.countries.filter(country => country.country.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  compareName(a:Result,b:Result):number{
-  if(a.country>b.country)
-    return 1;
-  if(a.country<b.country)
-    return -1;
-  return 0;
+  compareName(a: Result, b: Result): number {
+    if (a.country > b.country) {
+      return 1;
+    }
+    if (a.country < b.country) {
+      return -1;
+    }
+    return 0;
   }
 
   get loaded() {
-    return this.global != null && this.results != null && this.todayDeaths != null && this.todayCases != null && this.dataPoints.length!=0;
+    return this.global != null && this.results != null && this.todayDeaths != null && this.todayCases != null && this.dataPoints.length != 0;
   }
 
   applyFilter(event: Event) {
@@ -122,10 +127,9 @@ export class HomeComponent implements OnInit {
 
   searchCountry() {
     let countries: string[] = this.dataSource.data.map((result) => result.country);
-    if(countries.includes(this.search.value))
-    {
-      console.log("Exists");
-      this.router.navigate(['/stats',this.search.value]);
+    if (countries.includes(this.search.value)) {
+      console.log('Exists');
+      this.router.navigate(['/stats', this.search.value]);
     }
   }
 }
@@ -137,10 +141,11 @@ export class DataPoint {
   ) {
   }
 }
-export class CountryFlag{
+
+export class CountryFlag {
   constructor(
-    public country:string,
-    public flag:string,
+    public country: string,
+    public flag: string,
   ) {
   }
 }

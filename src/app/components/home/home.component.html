@@ -1,8 +1,8 @@
 <body>
 <form class="example-form pl-2" >
   <mat-form-field style="width: 300px" class="example-full-width">
+    <mat-label style="color: white">Search Country</mat-label>
     <input type="text"
-           placeholder="Search Country"
            aria-label="Country Name"
            matInput
            name="search"
@@ -95,10 +95,9 @@
     </div>
   </div>
   <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+    <mat-label style="font-size: 18px">Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" >
   </mat-form-field>
-
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort matSortStart="desc">
 
