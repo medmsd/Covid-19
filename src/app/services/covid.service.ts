@@ -3,17 +3,17 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Result} from '../models/result';
 import {World} from '../models/world';
-import {repeat} from 'rxjs/operators';
+import {Details} from '../models/details';
 
 const COUNTRIES = 'https://corona.lmao.ninja/countries';
 const WORLD = 'https://corona.lmao.ninja/all';
-const CODES = 'assets/CountriesCodes.json';
+const DETAILS = 'https://api.covid19api.com/total/country/';
+const CONFIRMED = '/status/confirmed';
 @Injectable({
   providedIn: 'root'
 })
 export class CovidService {
 
-  private repeateRate: number = 10;
   constructor(private http:HttpClient) {
 
   }
@@ -31,6 +31,13 @@ export class CovidService {
 
   getWorldData():Observable<World>{
     return this.http.get<World>(WORLD);
+  }
+
+  getCountryDetails(countryName: string): Observable<Details[]> {
+    return this.http.get<Details[]>(DETAILS + countryName + CONFIRMED);
+  }
+  getCountryData(countryName:string):Observable<Result>{
+    return this.http.get<Result>(COUNTRIES + '/' + countryName);
   }
 
 

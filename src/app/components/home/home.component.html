@@ -1,0 +1,146 @@
+<body>
+<form class="example-form pl-2" >
+  <mat-form-field style="width: 300px" class="example-full-width">
+    <input type="text"
+           placeholder="Search Country"
+           aria-label="Country Name"
+           matInput
+           name="search"
+            [formControl]="search"
+           id="search"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let countryFlag of filteredCountries | async " [value]="countryFlag.country">
+        <img style="float:left;margin-top: 12.5px;" class="example-option-img"  width="38" aria-hidden [src]="countryFlag.flag" height="25">
+        <span style="float:right" class="mx-2">{{countryFlag.country}}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button (click)="searchCountry()" [disabled]="search.value==''" mat-icon-button aria-label="search">
+    <mat-icon>search</mat-icon>
+  </button>
+</form>
+<div [loading]="!loaded" echarts [merge]="updateOptions" [options]="options" [theme]="'dark'"  class="chart"></div>
+<div>
+  <div class="text-center world">
+    <h1>Global World</h1> <br>
+    <div>
+      <h2>Cases : </h2>
+      <h3>{{(global | async)?.cases}}</h3>
+    </div>
+    <h2> Deaths : </h2>
+    <h3 style="color:red">{{(global| async)?.deaths}} </h3>
+
+    <div>
+      <h2>Recovered :</h2>
+      <h3 style="color:green"> {{(global| async)?.recovered}}</h3>
+    </div>
+    <div>
+      <h2> Active : </h2>
+      <h3 style="color:#47c5ff">{{(global| async)?.active}}</h3>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <h1 class="text-center">
+      Today News
+    </h1>
+    <div class="row">
+      <div class="col-sm-6">
+        <h2 class="text-center">Today Deaths</h2>
+        <div class="row">
+          <div *ngFor="let result of (todayDeaths | async)?.slice(0,topNumber) " class="col-sm-6">
+            <br>
+            <div class="text-center">
+              <div>
+                <div>
+                  <span>{{result.country}}</span>
+                  <p>
+                    <img width="125" height="83.5" [src]="result.countryInfo.flag"/>
+                  </p>
+                </div>
+                <div>
+                  Total <span style="color:orange"> {{result.deaths}} </span><br>
+                  Today <span style="color:red">{{result.todayDeaths}}</span>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <h2 class="text-center">Today Cases</h2>
+        <div class="row">
+          <div *ngFor="let result of (todayCases | async)?.slice(0,topNumber)" class="col-sm-6">
+            <br>
+            <div class="text-center">
+              <div>
+                <div>
+                  <span>{{result.country}}</span>
+                  <p>
+                    <img width="125" height="83.5" [src]="result.countryInfo.flag"/>
+                  </p>
+                </div>
+                <div>
+                  Total <span style="color:orange"> {{result.cases}} </span><br>
+                  Today <span style="color:red">{{result.todayCases}}</span>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort matSortStart="desc">
+
+      <ng-container matColumnDef="country">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Country</th>
+        <td style="width: 300px" mat-cell *matCellDef="let row"><p><span
+          style="float:left;background: #333333">{{row.country}}</span> <img style="float:right;margin-right: 50px"
+                                                                             width="62.5" height="41.75"
+                                                                             [src]="row.countryInfo.flag"/></p></td>
+      </ng-container>
+
+      <ng-container matColumnDef="cases">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cases</th>
+        <td mat-cell *matCellDef="let row"> {{row.cases}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deaths">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Deaths</th>
+        <td mat-cell *matCellDef="let row"> {{row.deaths}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="recovered">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Recovered</th>
+        <td mat-cell *matCellDef="let row"> {{row.recovered}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="todayDeaths">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Today Deaths</th>
+        <td mat-cell *matCellDef="let row"> {{row.todayDeaths}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="todayCases">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Today Cases</th>
+        <td mat-cell *matCellDef="let row"> {{row.todayCases}} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="cols"></tr>
+      <tr mat-row *matRowDef="let row; columns: cols;">
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>
+</body>

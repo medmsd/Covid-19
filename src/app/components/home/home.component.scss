@@ -1,5 +1,5 @@
 *{
-  background: black;
+  background: #333333!important;
   color: white;
 }
 div{
@@ -25,14 +25,6 @@ td,tr,th {
 .world  h2,.world h3{
   display: inline;
 }
-.canvasjs-chart-credit{
-  display: none!important;
-}
 span[value='Trial Version']{
-display: none!important;
-}
-#chartContainer {
-  background: #000000!important;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #434343, #000000)!important;  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #434343, #000000)!important;
+  display: none!important;
 }

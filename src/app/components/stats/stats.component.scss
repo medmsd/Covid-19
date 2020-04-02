@@ -1,0 +1,35 @@
+*{
+  background: #333333!important;
+  color: white;
+}
+div{
+  font-family: Baskerville, "Baskerville Old Face", "Goudy Old Style", Garamond, "Times New Roman", serif;
+  font-size: 24px;
+}
+table{
+  font-family: Baskerville, "Baskerville Old Face", "Goudy Old Style", Garamond, "Times New Roman", serif;
+  width: 100%;
+}
+input{
+  font-size: 18px;
+}
+td,tr,th {
+  background: #333333!important;
+  color: white!important;
+  font-size: 20px;
+}
+.ui-paginator-bottom {
+  background: #333333!important;
+  color: white!important;
+}
+.world  h2,.world h3{
+  display: inline;
+}
+span[value='Trial Version']{
+  display: none!important;
+}
+.loading-indicator {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
