@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
           return of<Result[]>([]);
         })
       ).subscribe(data => {
-      this.dataSource.data = data;
+      this.dataSource.data = data.sort();
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.filteredCountries = this.search.valueChanges

@@ -12,7 +12,7 @@ import {catchError, map, switchMap, tap} from 'rxjs/operators';
   styleUrls: ['./stats.component.scss']
 })
 export class StatsComponent implements OnInit {
-  public result: Observable<Result>;
+  public result: Result;
   public countryName: string;
   public data: number[] = [];
   public xAxisData: string[] = [];
@@ -30,19 +30,11 @@ export class StatsComponent implements OnInit {
     this.covidService.getCountryDetails(this.countryName).subscribe((details) => {
       this.loading = false;
       if (details[0] != undefined) {
-        console.log(details);
-        if (details.length < 16) {
+
           details.forEach((detail) => {
             this.data.push(detail.Cases);
             this.xAxisData.push(new Date(detail.Date).toLocaleDateString());
           });
-        } else {
-          let last: Details[] = details.slice(details.length - 16, details.length);
-          last.forEach((detail) => {
-            this.data.push(detail.Cases);
-            this.xAxisData.push(new Date(detail.Date).toLocaleDateString());
-          });
-
         }
         this.updateOptions = {
           xAxis: {
@@ -52,16 +44,11 @@ export class StatsComponent implements OnInit {
             data: this.data
           }]
         };
-      }
     });
-    this.result = this.covidService.getCountryData(this.countryName);
-    this.result.pipe(catchError(((err, caught) => {
-      this.loading = false;
-      this.countryFound = false;
-      throw err;
-    }))).subscribe((result) => {
+    this.covidService.getCountryData(this.countryName).subscribe((res)=>{
       this.loading = false;
       this.countryFound = true;
+      this.result=res;
     });
 
     this.options = {

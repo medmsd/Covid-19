@@ -6,7 +6,8 @@ import {StatsComponent} from './components/stats/stats.component';
 
 const routes: Routes = [
   {path:"",component: HomeComponent},
-  {path:"stats/:id",component:StatsComponent}
+  {path:"stats/:id",component:StatsComponent},
+  {path:"**",redirectTo:""}
 ];
 
 @NgModule({

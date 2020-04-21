@@ -8,22 +8,22 @@
   <div class="text-center">
     <div>
       <div>
-        <span>{{(result|async)?.country}}</span>
+        <span>{{result.country}}</span>
         <p>
-          <img width="125" height="83.5" [src]="(result|async)?.countryInfo.flag"/>
+          <img width="125" height="83.5" [src]="result.countryInfo.flag"/>
         </p>
       </div>
       <div class="text-center" style="justify-content: left;">
         <div>
-          Cases <span style="color:orange"> {{(result|async)?.cases}} </span>
+          Cases <span style="color:orange"> {{result.cases}} </span>
         </div>
         <div>
-          Deaths <span style="color:red">{{(result|async)?.deaths}}</span>
+          Deaths <span style="color:red">{{result.deaths}}</span>
         </div>
-        <div>Critical <span style="color:rebeccapurple">{{(result|async)?.critical}}</span></div>
-        <div>Recovered <span style="color:green">{{(result|async)?.recovered}}</span></div>
-        <div>Today Cases <span style="color:orange">{{(result|async)?.todayCases}}</span></div>
-        <div>Today Deaths <span style="color:red">{{(result|async)?.todayDeaths}}</span></div>
+        <div>Critical <span style="color:rebeccapurple">{{result.critical}}</span></div>
+        <div>Recovered <span style="color:green">{{result.recovered}}</span></div>
+        <div>Today Cases <span style="color:orange">{{result.todayCases}}</span></div>
+        <div>Today Deaths <span style="color:red">{{result.todayDeaths}}</span></div>
       </div>
     </div>
   </div>

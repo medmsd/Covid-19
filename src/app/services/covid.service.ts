@@ -5,8 +5,8 @@ import {Result} from '../models/result';
 import {World} from '../models/world';
 import {Details} from '../models/details';
 
-const COUNTRIES = 'https://corona.lmao.ninja/countries';
-const WORLD = 'https://corona.lmao.ninja/all';
+const COUNTRIES = 'https://corona.lmao.ninja/v2/countries';
+const WORLD = 'https://corona.lmao.ninja/v2/all';
 const DETAILS = 'https://api.covid19api.com/total/country/';
 const CONFIRMED = '/status/confirmed';
 @Injectable({
@@ -19,7 +19,7 @@ export class CovidService {
   }
 
   getAllData(): Observable<Result[]> {
-    return this.http.get<Result[]>(COUNTRIES);
+    return this.http.get<Result[]>(COUNTRIES+"?sort=cases");
   }
 
   getAllDataByTodayDeaths():Observable<Result[]>{
